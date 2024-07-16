@@ -42,13 +42,13 @@ public class TopicosController {
     @GetMapping("/{id}")
     public ResponseEntity detalharTopico(@PathVariable @Valid Long id){
         DadosDetalhamentoTopico topico = topicoService.detalhar(id);
-        return  ResponseEntity.ok(topico);
+        return ResponseEntity.ok(topico);
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity atualizarTopico(@PathVariable Long id){
-        DadosAtualizacaoTopico topico = topicoService.atualizar(id);
+    public ResponseEntity atualizarTopico(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoTopico dados){
+        DadosAtualizacaoTopico topico = topicoService.atualizar(dados);
         return ResponseEntity.ok(topico);
     }
 

@@ -1,5 +1,6 @@
 package br.com.alura.ForumHub.domain.usuario;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +32,12 @@ public class Usuario implements UserDetails {
     String email;
 
     String senha;
+
+    public Usuario(DadosCadastroUsuario dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.senha = dados.senha();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

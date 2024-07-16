@@ -11,9 +11,10 @@ public class ValidadorTopicoDuplicado implements ValidadorCadastroTopico {
     @Autowired
     private TopicoRepository repository;
 
+
     public void validar(DadosCadastroTopico dados){
-        if(repository.findByTituloAndMensagem(dados.titulo(), dados.mensagem())){
-            throw new ValidacaoException("Topico com o mesmo titulo e mensagem");
+        if(repository.findByTituloAndMensagem(dados.titulo(), dados.mensagem()).isPresent()){
+                throw new ValidacaoException("Topico com o mesmo titulo e mensagem");
+            }
         };
     }
-}

@@ -1,7 +1,5 @@
 package br.com.alura.ForumHub.domain.topico;
 
-import br.com.alura.ForumHub.domain.curso.Curso;
-import br.com.alura.ForumHub.domain.usuario.Usuario;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -11,12 +9,13 @@ public record DadosCadastroTopico(
        @NotBlank
        String mensagem,
        @NotNull
-       Curso curso,
+       Long idCurso,
        @NotNull
-       Usuario autor
+       Long idAutor
 ) {
 
        public DadosCadastroTopico(Topico topico) {
-              this(topico.getTitulo(),topico.getMensagem(),topico.getCurso(),topico.getAutor());
+              this(topico.getTitulo(),topico.getMensagem(),topico.getCurso().getId(),topico.getAutor().getId());
        }
+
 }

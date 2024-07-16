@@ -1,5 +1,6 @@
 package br.com.alura.ForumHub.domain.curso;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +25,9 @@ public class Curso {
 
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
+
+    public Curso(DadosCadastroCurso dados) {
+        this.nome = dados.nome();
+        this.categoria = dados.categoria();
+    }
 }
